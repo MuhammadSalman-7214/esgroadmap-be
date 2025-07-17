@@ -1,0 +1,55 @@
+{
+  "name": "esgroadmap-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node api/server.js",
+    "generate-prisma": "prisma generate",
+    "dev": "nodemon --watch src --exec \"node --loader ts-node/esm\" src/dev.ts",
+    "build": "npm run generate-prisma && tsc && npm run copy-prisma",
+    "prod": "npm run generate-prisma && npm run build && npm start",
+    "copy-prisma": "mkdir -p api/generated/prisma && cp -r src/generated/prisma/* api/generated/prisma/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdulhananasif/esgroadmap-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abdulhananasif/esgroadmap-backend/issues"
+  },
+  "homepage": "https://github.com/abdulhananasif/esgroadmap-backend#readme",
+  "description": "",
+  "dependencies": {
+    "@prisma/client": "^6.6.0",
+    "axios": "^1.9.0",
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "node-cron": "^4.1.1",
+    "pdf-lib": "^1.17.1",
+    "pdfkit": "^0.17.1"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.9.36",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^22.14.1",
+    "@types/node-cron": "^3.0.11",
+    "@types/nodemailer": "^6.4.17",
+    "@types/pdfkit": "^0.14.0",
+    "nodemon": "^3.1.9",
+    "prisma": "^6.6.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}

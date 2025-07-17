@@ -1,0 +1,12 @@
+import express from 'express';
+import authenticateUser from '../../middleware/authenticateUser.js';
+import { activate, editPassword, editProfile, forgotPassword, generateOtp, updateUser, verifyOtp, } from '../../controller/user/index.js';
+const userRouter = express.Router();
+userRouter.put('/', authenticateUser, editProfile);
+userRouter.put('/activate', authenticateUser, activate);
+userRouter.put('/editPassword', authenticateUser, editPassword);
+userRouter.post('/generateOtp', generateOtp);
+userRouter.post('/verifyOtp', verifyOtp);
+userRouter.put('/forgotPassword', forgotPassword);
+userRouter.put('/update', authenticateUser, updateUser);
+export default userRouter;
