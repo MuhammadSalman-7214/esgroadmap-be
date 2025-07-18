@@ -4,7 +4,7 @@ import {
   allSentence,
   carbonReduction,
   companyUniverse,
-  getCountriesByTable,
+  getFiltersByTableName,
   renewables,
   saveSearch,
   sentenceGender,
@@ -70,9 +70,9 @@ toolRouter.post(
 );
 
 toolRouter.get(
-  "/countries",
+  "/filters",
   authenticateUser as unknown as express.RequestHandler,
-  getCountriesByTable as unknown as express.RequestHandler
+  getFiltersByTableName as unknown as express.RequestHandler
 );
 
 export default toolRouter;

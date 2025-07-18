@@ -1,6 +1,6 @@
 import express from "express";
 import authenticateUser from "../../middleware/authenticateUser.js";
-import { allSentence, carbonReduction, companyUniverse, getCountriesByTable, renewables, saveSearch, sentenceGender, supplyChain, wasteAndRecycling, waterManagement, } from "../../controller/tool/index.js";
+import { allSentence, carbonReduction, companyUniverse, getFiltersByTableName, renewables, saveSearch, sentenceGender, supplyChain, wasteAndRecycling, waterManagement, } from "../../controller/tool/index.js";
 const toolRouter = express.Router();
 toolRouter.get("/carbonSentence", authenticateUser, carbonReduction);
 toolRouter.get("/wasteSentence", authenticateUser, wasteAndRecycling);
@@ -11,5 +11,5 @@ toolRouter.get("/renewablesSentence", authenticateUser, renewables);
 toolRouter.get("/allSentence", authenticateUser, allSentence);
 toolRouter.get("/companyUniverse", authenticateUser, companyUniverse);
 toolRouter.post("/search", authenticateUser, saveSearch);
-toolRouter.get("/countries", authenticateUser, getCountriesByTable);
+toolRouter.get("/filters", authenticateUser, getFiltersByTableName);
 export default toolRouter;
