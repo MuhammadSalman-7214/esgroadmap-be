@@ -23,13 +23,13 @@ export const setAuthCookies = (
   res.cookie('accessToken', accessToken, {
     httpOnly: true,
     secure: false,
-    sameSite: 'lax',
+    sameSite: 'strict',
     maxAge: 10 * 60 * 1000,
   });
   res.cookie('refreshToken', refreshToken, {
     httpOnly: true,
     secure: false,
-    sameSite: 'lax',
+    sameSite: 'strict',
     maxAge: 12 * 60 * 60 * 1000,
   });
 };
