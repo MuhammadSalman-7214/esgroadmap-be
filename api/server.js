@@ -13,6 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 const allowedorigins = [
+    'http://members.esgroadmap.com',
     'https://esgroadmap-frontend.vercel.app',
     'https://esgroadmap-fe-seven.vercel.app',
     'http://localhost:5173',
