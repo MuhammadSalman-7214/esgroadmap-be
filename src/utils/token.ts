@@ -8,7 +8,7 @@ const accessSecret = process.env.ACCESS_TOKEN_SECRET as string;
 const refreshSecret = process.env.REFRESH_TOKEN_SECRET as string;
 
 export const generateAccessToken = (userId: string | number) => {
-  return jwt.sign({id: userId}, accessSecret, {expiresIn: '30m'});
+  return jwt.sign({id: userId}, accessSecret, {expiresIn: '10m'});
 };
 
 export const generateRefreshToken = (userId: string | number) => {
@@ -24,7 +24,7 @@ export const setAuthCookies = (
     httpOnly: true,
     secure: false,
     sameSite: 'strict',
-    maxAge: 30 * 60 * 1000,
+    maxAge: 10 * 60 * 1000,
   });
   res.cookie('refreshToken', refreshToken, {
     httpOnly: true,
