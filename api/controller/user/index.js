@@ -1,9 +1,9 @@
-import validateRequest from '../../utils/validateRequest.js';
-import { editProfileSchema } from '../../validation/schema/user/index.js';
-import { prisma } from '../../server.js';
-import { comparePasswords, hashPassword } from '../../utils/password.js';
-import { deleteOtp, getOtp, saveOtp, verifiedUser } from '../../utils/otp.js';
-import { sendEmail } from '../../utils/email.js';
+import validateRequest from "../../utils/validateRequest.js";
+import { editProfileSchema } from "../../validation/schema/user/index.js";
+import { prisma } from "../../server.js";
+import { comparePasswords, hashPassword } from "../../utils/password.js";
+import { deleteOtp, getOtp, saveOtp, verifiedUser } from "../../utils/otp.js";
+import { sendEmail } from "../../utils/email.js";
 export const editProfile = async (req, res) => {
     const { id } = req.user;
     let response = {};
@@ -34,7 +34,7 @@ export const activate = async (req, res) => {
     try {
         await prisma.user.update({ where: { id: id }, data: { isActive: true } });
         response.status = 200;
-        response.message = 'success';
+        response.message = "Success";
     }
     catch (err) {
         response.status = 400;
@@ -51,11 +51,11 @@ export const editPassword = async (req, res) => {
             where: { id },
         });
         if (!user) {
-            throw { message: 'User not found' };
+            throw { message: "User not found" };
         }
         const isMatch = await comparePasswords(oldPassword, user.password);
         if (!isMatch) {
-            throw { message: 'old password is incorrect' };
+            throw { message: "Old password is incorrect" };
         }
         const hashedPassword = await hashPassword(newPassword);
         await prisma.user.update({
@@ -67,7 +67,7 @@ export const editPassword = async (req, res) => {
             },
         });
         response.status = 200;
-        response.message = 'password changed';
+        response.message = "Password changed";
     }
     catch (err) {
         response.status = 400;
@@ -81,22 +81,22 @@ export const updateUser = async (req, res) => {
         const { planId, planName, customerId, isPaid } = req.body;
         const user = await prisma.user.findUnique({
             where: {
-                id: req.user.id
-            }
+                id: req.user.id,
+            },
         });
         if (!user) {
-            res.status(400).json({ message: "user not exist" });
+            res.status(400).json({ message: "User not exist" });
         }
         await prisma.user.update({
             where: {
-                id: req.user.id
+                id: req.user.id,
             },
             data: {
                 planId,
                 planName,
                 customerId,
                 isPaid,
-            }
+            },
         });
         response.status = 200;
         response.message = "User updated";
@@ -115,16 +115,28 @@ export const generateOtp = async (req, res) => {
             where: { email },
         });
         if (!user) {
-            throw { message: `user with this email id ${email} is not registered` };
+            throw { message: `User with this email is not registered` };
         }
         const otp = Math.floor(Math.random() * (9999 - 1111) + 1000).toString();
-        const expiresIn = new Date(Date.now() + 60 * 1000);
+        const expiresIn = new Date(Date.now() + 5 * 60 * 1000);
         saveOtp(email, otp, expiresIn);
-        const subject = 'Your OTP Code';
-        const content = `Your OTP is ${otp}. It will expire in 1 minut.`;
+        const subject = "Password Reset Request — Your One-Time Password (OTP)";
+        const content = `
+  <div style="font-family: Arial, sans-serif; line-height: 1; color: #000000;">
+    <p>Dear! ${user.username},</p>
+    <p>We received a request to reset the password for your account. To proceed, please use the One-Time Password (OTP) below:</p>
+    <p style="font-size: 20px; font-weight: bold; color: #000;">Your OTP code: <b>${otp}</b></p>
+    <p>This code will expire in <strong>5 minute</strong>.</p>
+    <p>If you did not request a password reset, please ignore this email. For your account’s security, do not share this code with anyone.</p>
+    <p>Thank you,<br />
+    <strong>Team ESGRoadmap</strong></p>
+  </div>
+`;
         await sendEmail(email, subject, content);
         response.status = 200;
-        response.message = { Message: "OTP sended to your mail and it will expire in 1 minut" };
+        response.message = {
+            Message: "OTP sended to your mail and it will expire in 1 minut",
+        };
     }
     catch (err) {
         response.status = 400;
@@ -138,15 +150,15 @@ export const verifyOtp = async (req, res) => {
         const { email, otp } = req.body;
         const stored = getOtp(email);
         if (!stored) {
-            throw new Error('OTP expired or not found');
+            throw new Error("OTP expired or not found");
         }
         if (stored.otp !== otp) {
-            throw new Error('Invalid OTP');
+            throw new Error("Invalid OTP");
         }
         deleteOtp(email);
         verifiedUser.set(email, true);
         response.status = 200;
-        response.message = 'OTP verified successfully';
+        response.message = "OTP verified successfully";
     }
     catch (err) {
         response.status = 400;
@@ -159,13 +171,13 @@ export const forgotPassword = async (req, res) => {
     let response = {};
     try {
         if (!verifiedUser.get(email)) {
-            throw { message: 'otp not verified' };
+            throw { message: "Otp not verified" };
         }
         const user = await prisma.user.findFirst({
             where: { email },
         });
         if (!user) {
-            throw new Error('User not found');
+            throw new Error("User not found");
         }
         const hashedPassword = await hashPassword(newPassword);
         await prisma.user.update({
@@ -173,7 +185,7 @@ export const forgotPassword = async (req, res) => {
             data: { password: hashedPassword },
         });
         response.status = 200;
-        response.message = 'Password changed';
+        response.message = "Password changed";
     }
     catch (err) {
         response.status = 400;

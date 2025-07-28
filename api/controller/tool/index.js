@@ -13,7 +13,11 @@ export const carbonReduction = async (req, res) => {
             baseFilter = {
                 sentence_carbon: 1,
                 ...(country && { Country: country }),
-                ...(company && { Company: typeof (company) === "string" ? company.replace(/['"]+/g, "").trim() : undefined }),
+                ...(company && {
+                    Company: typeof company === "string"
+                        ? company.replace(/['"]+/g, "").trim()
+                        : undefined,
+                }),
                 ...(sector && { SectorCode1: sector }),
                 ...(year && {
                     SentenceTargetYear: {
@@ -88,7 +92,7 @@ export const carbonReduction = async (req, res) => {
 export const wasteAndRecycling = async (req, res) => {
     let response = {};
     try {
-        const { search, pagination = "true", country, company, year, sector } = req.query;
+        const { search, pagination = "true", country, company, year, sector, } = req.query;
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const isPaginated = pagination !== "false";
@@ -98,7 +102,11 @@ export const wasteAndRecycling = async (req, res) => {
             baseFilter = {
                 sentence_waste: 1,
                 ...(country && { Country: country }),
-                ...(company && { Company: typeof (company) === "string" ? company.replace(/['"]+/g, "").trim() : undefined }),
+                ...(company && {
+                    Company: typeof company === "string"
+                        ? company.replace(/['"]+/g, "").trim()
+                        : undefined,
+                }),
                 ...(sector && { SectorCode1: sector }),
                 ...(year && {
                     SentenceTargetYear: {
@@ -173,7 +181,7 @@ export const wasteAndRecycling = async (req, res) => {
 export const waterManagement = async (req, res) => {
     let response = {};
     try {
-        const { search, pagination = "true", country, company, year, sector } = req.query;
+        const { search, pagination = "true", country, company, year, sector, } = req.query;
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const isPaginated = pagination !== "false";
@@ -183,7 +191,11 @@ export const waterManagement = async (req, res) => {
             baseFilter = {
                 sentence_water: 1,
                 ...(country && { Country: country }),
-                ...(company && { Company: typeof (company) === "string" ? company.replace(/['"]+/g, "").trim() : undefined }),
+                ...(company && {
+                    Company: typeof company === "string"
+                        ? company.replace(/['"]+/g, "").trim()
+                        : undefined,
+                }),
                 ...(sector && { SectorCode1: sector }),
                 ...(year && {
                     SentenceTargetYear: {
@@ -258,7 +270,7 @@ export const waterManagement = async (req, res) => {
 export const sentenceGender = async (req, res) => {
     let response = {};
     try {
-        const { search, pagination = "true", country, company, year, sector } = req.query;
+        const { search, pagination = "true", country, company, year, sector, } = req.query;
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const isPaginated = pagination !== "false";
@@ -268,7 +280,11 @@ export const sentenceGender = async (req, res) => {
             baseFilter = {
                 sentence_gender: 1,
                 ...(country && { Country: country }),
-                ...(company && { Company: typeof (company) === "string" ? company.replace(/['"]+/g, "").trim() : undefined }),
+                ...(company && {
+                    Company: typeof company === "string"
+                        ? company.replace(/['"]+/g, "").trim()
+                        : undefined,
+                }),
                 ...(sector && { SectorCode1: sector }),
                 ...(year && {
                     SentenceTargetYear: {
@@ -343,7 +359,7 @@ export const sentenceGender = async (req, res) => {
 export const supplyChain = async (req, res) => {
     let response = {};
     try {
-        const { search, pagination = "true", country, company, year, sector } = req.query;
+        const { search, pagination = "true", country, company, year, sector, } = req.query;
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const isPaginated = pagination !== "false";
@@ -353,7 +369,11 @@ export const supplyChain = async (req, res) => {
             baseFilter = {
                 sentence_suppliers: 1,
                 ...(country && { Country: country }),
-                ...(company && { Company: typeof (company) === "string" ? company.replace(/['"]+/g, "").trim() : undefined }),
+                ...(company && {
+                    Company: typeof company === "string"
+                        ? company.replace(/['"]+/g, "").trim()
+                        : undefined,
+                }),
                 ...(sector && { SectorCode1: sector }),
                 ...(year && {
                     SentenceTargetYear: {
@@ -428,7 +448,7 @@ export const supplyChain = async (req, res) => {
 export const renewables = async (req, res) => {
     let response = {};
     try {
-        const { search, pagination = "true", country, company, year, sector } = req.query;
+        const { search, pagination = "true", country, company, year, sector, } = req.query;
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const isPaginated = pagination !== "false";
@@ -438,7 +458,11 @@ export const renewables = async (req, res) => {
             baseFilter = {
                 sentence_renewables: 1,
                 ...(country && { Country: country }),
-                ...(company && { Company: typeof (company) === "string" ? company.replace(/['"]+/g, "").trim() : undefined }),
+                ...(company && {
+                    Company: typeof company === "string"
+                        ? company.replace(/['"]+/g, "").trim()
+                        : undefined,
+                }),
                 ...(sector && { SectorCode1: sector }),
                 ...(year && {
                     SentenceTargetYear: {
@@ -513,7 +537,7 @@ export const renewables = async (req, res) => {
 export const allSentence = async (req, res) => {
     let response = {};
     try {
-        const { search, country, pagination = "true", company, year, sector } = req.query;
+        const { search, country, pagination = "true", company, year, sector, } = req.query;
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const isPaginated = pagination !== "false";
@@ -522,7 +546,11 @@ export const allSentence = async (req, res) => {
         if (country || company || year || sector) {
             baseFilter = {
                 ...(country && { Country: country }),
-                ...(company && { Company: typeof (company) === "string" ? company.replace(/['"]+/g, "").trim() : undefined }),
+                ...(company && {
+                    Company: typeof company === "string"
+                        ? company.replace(/['"]+/g, "").trim()
+                        : undefined,
+                }),
                 ...(sector && { SectorCode1: sector }),
                 ...(year && {
                     SentenceTargetYear: {
@@ -607,7 +635,11 @@ export const companyUniverse = async (req, res) => {
         if (country || company || sector) {
             baseFilter = {
                 ...(country && { Country: country }),
-                ...(company && { Company: typeof (company) === "string" ? company.replace(/['"]+/g, "").trim() : undefined }),
+                ...(company && {
+                    Company: typeof company === "string"
+                        ? company.replace(/['"]+/g, "").trim()
+                        : undefined,
+                }),
                 ...(sector && { sector_code__1__NAICS_: sector }),
             };
         }
@@ -713,7 +745,7 @@ export const saveSearch = async (req, res) => {
         });
         response.status = 200;
         response.message = {
-            message: `search saved successfully`,
+            message: `Search saved successfully`,
             search: newSearch,
         };
     }
@@ -744,6 +776,7 @@ export const getFiltersByTableName = async (req, res) => {
                 select: {
                     Country: true,
                     SectorCode1: true,
+                    SectorName1: true,
                     Company: true,
                     SentenceTargetYear: true,
                 },
@@ -755,6 +788,7 @@ export const getFiltersByTableName = async (req, res) => {
                     Country: true,
                     Company: true,
                     sector_code__1__NAICS_: true,
+                    sector_name__1__NAICS_: true,
                 },
             });
         }
@@ -763,6 +797,7 @@ export const getFiltersByTableName = async (req, res) => {
                 select: {
                     Country: true,
                     SectorCode1: true,
+                    SectorName1: true,
                     Company: true,
                     SentenceTargetYear: true,
                 },
@@ -796,12 +831,20 @@ export const getFiltersByTableName = async (req, res) => {
                 : item.SectorCode1)
                 .filter(Boolean)),
         ];
+        const uniqueSectorNames = [
+            ...new Set(getFilter
+                .map((item) => tableName === "companyUniverse"
+                ? item.sector_name__1__NAICS_
+                : item.SectorName1)
+                .filter(Boolean)),
+        ];
         response.status = 200;
         response.message = {
             uniqueCountries,
             uniqueCompanies,
             targetYears,
             uniqueSector,
+            uniqueSectorNames,
         };
     }
     catch (err) {
