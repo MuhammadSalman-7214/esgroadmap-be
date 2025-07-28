@@ -1,4 +1,3 @@
-// Inside src/index.ts or your routes file
 import { Request, Response } from 'express';
 import { paddle } from '../../utils/paddleClient.js';
 import { AuthenticatedRequest } from '../../types/request.js';
@@ -8,7 +7,6 @@ interface PaddleSubscription {
   id: string;
   customer_id: string;
   status: string;
-  // ...other fields you need
 }
 
 interface PaddleResponse {

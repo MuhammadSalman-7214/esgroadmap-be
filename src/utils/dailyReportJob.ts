@@ -4,7 +4,6 @@ import fsPromises from "fs/promises";
 import path from "path";
 import { prisma } from "../server.js";
 import PDFDocument from "pdfkit";
-// import { PDFDocument } from "pdf-lib"
 import { sendEmail } from "../utils/email.js";
 import dotenv from "dotenv";
 import compressPdf from "./pdfCompression.js";

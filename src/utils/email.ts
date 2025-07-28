@@ -1,6 +1,6 @@
-import axios from 'axios';
-import path from 'path';
-import fs from 'fs/promises';
+import axios from "axios";
+import path from "path";
+import fs from "fs/promises";
 
 const API_KEY = process.env.BREVO_API_KEY;
 const BREVO_EMAIL = process.env.BREVO_EMAIL;
@@ -17,7 +17,7 @@ export const sendEmail = async (
 
     if (attachmentPath) {
       const fileBuffer = await fs.readFile(attachmentPath);
-      const base64Content = fileBuffer.toString('base64');
+      const base64Content = fileBuffer.toString("base64");
 
       attachmentData.push({
         name: path.basename(attachmentPath),
@@ -26,7 +26,7 @@ export const sendEmail = async (
     }
 
     const response = await axios.post(
-      'https://api.brevo.com/v3/smtp/email',
+      "https://api.brevo.com/v3/smtp/email",
       {
         sender: { name: EMAIL_FROM_NAME, email: BREVO_EMAIL },
         to: [{ email: recipient }],
@@ -36,12 +36,21 @@ export const sendEmail = async (
       },
       {
         headers: {
-          'api-key': API_KEY,
-          'Content-Type': 'application/json',
+          "api-key": API_KEY,
+          "Content-Type": "application/json",
         },
       }
     );
   } catch (error: any) {
-    throw new Error('Email sending failed');
+    console.error("❌ Brevo Email API Error:", {
+      status: error?.response?.status,
+      data: error?.response?.data,
+      message: error?.message,
+    });
+
+    throw new Error(
+      "Email sending failed: " +
+        (error?.response?.data?.message || error?.message || "Unknown error")
+    );
   }
 };

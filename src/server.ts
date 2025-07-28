@@ -4,7 +4,6 @@ import prepareV1Routes from './apiVersion/v1/index.js';
 import {PrismaClient} from './generated/prisma/index.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import {sendEmail} from './utils/email.js';
 import { runDailyReportJob } from './utils/dailyReportJob.js';
 import cron from "node-cron";
 cron.schedule("59 23 * * *", runDailyReportJob);

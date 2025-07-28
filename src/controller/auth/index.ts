@@ -48,12 +48,12 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
     });
 
     if (userEmail) {
-      res.status(400).json({message: "user already exist"});
+      res.status(400).json({message: "User already exist"});
       return;
     }
 
     const hashedPassword = await hashPassword(password);
-    const newUser = await prisma.user.create({
+    await prisma.user.create({
       data: {
         username,
         email,
@@ -73,15 +73,12 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
     response.message = {
       Message: 'Signup successful, Check your email account activation',
     };
-    res.status(response.status).json(response.message);
     return;
   } catch (err: any) {
     response.status = 400;
     response.message = err.message;
-    res.status(response.status).json(response.message);
-    return;
   }
-  // res.status(response.status).json(response.message);
+  res.status(response.status).json(response.message);
 };
 
 export const signin = async (req: Request, res: Response): Promise<void> => {
@@ -105,12 +102,12 @@ export const signin = async (req: Request, res: Response): Promise<void> => {
       },
     });
     if (!user) {
-      res.status(400).json({message: "user not exist"});
+      res.status(400).json({message: "User not exist"});
       return;
     }
     const isMatch = await comparePasswords(password, user.password);
     if (!isMatch) {
-      res.status(400).json({message: "password not mached"});
+      res.status(400).json({message: "Password not mached"});
     }
     const accessToken = generateAccessToken(user.id);
     const refreshToken = generateRefreshToken(user.id);

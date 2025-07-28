@@ -25,20 +25,25 @@ export const carbonReduction = async (
     const searchStr = typeof search === "string" ? search : "";
     let baseFilter;
     if (country || company || year || sector) {
-  baseFilter = {
-    sentence_carbon: 1,
-    ...(country && { Country: country }),
-    ...(company && { Company: typeof(company)==="string"?company.replace(/['"]+/g, "").trim():undefined }),
-    ...(sector && { SectorCode1: sector }),
-    ...(year && {
-      SentenceTargetYear: {
-        contains: year,
-      },
-    }),
-  };
-} else {
-  baseFilter = { sentence_carbon: 1 };
-}
+      baseFilter = {
+        sentence_carbon: 1,
+        ...(country && { Country: country }),
+        ...(company && {
+          Company:
+            typeof company === "string"
+              ? company.replace(/['"]+/g, "").trim()
+              : undefined,
+        }),
+        ...(sector && { SectorCode1: sector }),
+        ...(year && {
+          SentenceTargetYear: {
+            contains: year,
+          },
+        }),
+      };
+    } else {
+      baseFilter = { sentence_carbon: 1 };
+    }
     const whereClause = safeSearch(baseFilter, searchStr, [
       "Company",
       "Target_sentence",
@@ -111,27 +116,39 @@ export const wasteAndRecycling = async (
   } = {};
 
   try {
-    const { search, pagination = "true", country , company , year , sector } = req.query;
+    const {
+      search,
+      pagination = "true",
+      country,
+      company,
+      year,
+      sector,
+    } = req.query;
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const isPaginated = pagination !== "false";
     const searchStr = typeof search === "string" ? search : "";
     let baseFilter;
     if (country || company || year || sector) {
-  baseFilter = {
-    sentence_waste: 1,
-    ...(country && { Country: country }),
-    ...(company && { Company: typeof(company)==="string"?company.replace(/['"]+/g, "").trim():undefined }),
-    ...(sector && { SectorCode1: sector }),
-    ...(year && {
-      SentenceTargetYear: {
-        contains: year,
-      },
-    }),
-  };
-} else {
-  baseFilter = { sentence_waste: 1 };
-}
+      baseFilter = {
+        sentence_waste: 1,
+        ...(country && { Country: country }),
+        ...(company && {
+          Company:
+            typeof company === "string"
+              ? company.replace(/['"]+/g, "").trim()
+              : undefined,
+        }),
+        ...(sector && { SectorCode1: sector }),
+        ...(year && {
+          SentenceTargetYear: {
+            contains: year,
+          },
+        }),
+      };
+    } else {
+      baseFilter = { sentence_waste: 1 };
+    }
     const whereClause = safeSearch(baseFilter, searchStr, [
       "Company",
       "Target_sentence",
@@ -204,27 +221,39 @@ export const waterManagement = async (
   } = {};
 
   try {
-    const { search, pagination = "true", country , company , year , sector } = req.query;
+    const {
+      search,
+      pagination = "true",
+      country,
+      company,
+      year,
+      sector,
+    } = req.query;
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const isPaginated = pagination !== "false";
     const searchStr = typeof search === "string" ? search : "";
     let baseFilter;
     if (country || company || year || sector) {
-  baseFilter = {
-    sentence_water: 1,
-    ...(country && { Country: country }),
-    ...(company && { Company: typeof(company)==="string"?company.replace(/['"]+/g, "").trim():undefined }),
-    ...(sector && { SectorCode1: sector }),
-    ...(year && {
-      SentenceTargetYear: {
-        contains: year,
-      },
-    }),
-  };
-} else {
-  baseFilter = { sentence_water: 1 };
-}
+      baseFilter = {
+        sentence_water: 1,
+        ...(country && { Country: country }),
+        ...(company && {
+          Company:
+            typeof company === "string"
+              ? company.replace(/['"]+/g, "").trim()
+              : undefined,
+        }),
+        ...(sector && { SectorCode1: sector }),
+        ...(year && {
+          SentenceTargetYear: {
+            contains: year,
+          },
+        }),
+      };
+    } else {
+      baseFilter = { sentence_water: 1 };
+    }
     const whereClause = safeSearch(baseFilter, searchStr, [
       "Company",
       "Target_sentence",
@@ -297,27 +326,39 @@ export const sentenceGender = async (
   } = {};
 
   try {
-    const { search, pagination = "true", country , company , year , sector } = req.query;
+    const {
+      search,
+      pagination = "true",
+      country,
+      company,
+      year,
+      sector,
+    } = req.query;
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const isPaginated = pagination !== "false";
     const searchStr = typeof search === "string" ? search : "";
     let baseFilter;
     if (country || company || year || sector) {
-  baseFilter = {
-    sentence_gender: 1,
-    ...(country && { Country: country }),
-    ...(company && { Company: typeof(company)==="string"?company.replace(/['"]+/g, "").trim():undefined }),
-    ...(sector && { SectorCode1: sector }),
-    ...(year && {
-      SentenceTargetYear: {
-        contains: year,
-      },
-    }),
-  };
-} else {
-  baseFilter = { sentence_gender: 1 };
-}
+      baseFilter = {
+        sentence_gender: 1,
+        ...(country && { Country: country }),
+        ...(company && {
+          Company:
+            typeof company === "string"
+              ? company.replace(/['"]+/g, "").trim()
+              : undefined,
+        }),
+        ...(sector && { SectorCode1: sector }),
+        ...(year && {
+          SentenceTargetYear: {
+            contains: year,
+          },
+        }),
+      };
+    } else {
+      baseFilter = { sentence_gender: 1 };
+    }
     const whereClause = safeSearch(baseFilter, searchStr, [
       "Company",
       "Target_sentence",
@@ -390,27 +431,39 @@ export const supplyChain = async (
   } = {};
 
   try {
-    const { search, pagination = "true", country , company , year , sector } = req.query;
+    const {
+      search,
+      pagination = "true",
+      country,
+      company,
+      year,
+      sector,
+    } = req.query;
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const isPaginated = pagination !== "false";
     const searchStr = typeof search === "string" ? search : "";
     let baseFilter;
     if (country || company || year || sector) {
-  baseFilter = {
-    sentence_suppliers: 1,
-    ...(country && { Country: country }),
-    ...(company && { Company: typeof(company)==="string"?company.replace(/['"]+/g, "").trim():undefined }),
-    ...(sector && { SectorCode1: sector }),
-    ...(year && {
-      SentenceTargetYear: {
-        contains: year,
-      },
-    }),
-  };
-} else {
-  baseFilter = { sentence_suppliers: 1 };
-}
+      baseFilter = {
+        sentence_suppliers: 1,
+        ...(country && { Country: country }),
+        ...(company && {
+          Company:
+            typeof company === "string"
+              ? company.replace(/['"]+/g, "").trim()
+              : undefined,
+        }),
+        ...(sector && { SectorCode1: sector }),
+        ...(year && {
+          SentenceTargetYear: {
+            contains: year,
+          },
+        }),
+      };
+    } else {
+      baseFilter = { sentence_suppliers: 1 };
+    }
     const whereClause = safeSearch(baseFilter, searchStr, [
       "Company",
       "Target_sentence",
@@ -483,27 +536,39 @@ export const renewables = async (
   } = {};
 
   try {
-    const { search, pagination = "true", country , company , year , sector } = req.query;
+    const {
+      search,
+      pagination = "true",
+      country,
+      company,
+      year,
+      sector,
+    } = req.query;
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const isPaginated = pagination !== "false";
     const searchStr = typeof search === "string" ? search : "";
     let baseFilter;
     if (country || company || year || sector) {
-  baseFilter = {
-    sentence_renewables: 1,
-    ...(country && { Country: country }),
-    ...(company && { Company: typeof(company)==="string"?company.replace(/['"]+/g, "").trim():undefined }),
-    ...(sector && { SectorCode1: sector }),
-    ...(year && {
-      SentenceTargetYear: {
-        contains: year,
-      },
-    }),
-  };
-} else {
-  baseFilter = { sentence_renewables: 1 };
-}
+      baseFilter = {
+        sentence_renewables: 1,
+        ...(country && { Country: country }),
+        ...(company && {
+          Company:
+            typeof company === "string"
+              ? company.replace(/['"]+/g, "").trim()
+              : undefined,
+        }),
+        ...(sector && { SectorCode1: sector }),
+        ...(year && {
+          SentenceTargetYear: {
+            contains: year,
+          },
+        }),
+      };
+    } else {
+      baseFilter = { sentence_renewables: 1 };
+    }
     const whereClause = safeSearch(baseFilter, searchStr, [
       "Company",
       "Target_sentence",
@@ -573,26 +638,38 @@ export const allSentence = async (
   let response: { status?: number; message?: any } = {};
 
   try {
-    const { search, country, pagination = "true", company, year, sector } = req.query;
+    const {
+      search,
+      country,
+      pagination = "true",
+      company,
+      year,
+      sector,
+    } = req.query;
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const isPaginated = pagination !== "false";
     const searchStr = typeof search === "string" ? search : "";
     let baseFilter;
     if (country || company || year || sector) {
-  baseFilter = {
-    ...(country && { Country: country }),
-    ...(company && { Company: typeof(company)==="string"?company.replace(/['"]+/g, "").trim():undefined }),
-    ...(sector && { SectorCode1: sector }),
-    ...(year && {
-      SentenceTargetYear: {
-        contains: year,
-      },
-    }),
-  };
-} else {
-  baseFilter = {};
-}
+      baseFilter = {
+        ...(country && { Country: country }),
+        ...(company && {
+          Company:
+            typeof company === "string"
+              ? company.replace(/['"]+/g, "").trim()
+              : undefined,
+        }),
+        ...(sector && { SectorCode1: sector }),
+        ...(year && {
+          SentenceTargetYear: {
+            contains: year,
+          },
+        }),
+      };
+    } else {
+      baseFilter = {};
+    }
     const whereClause = safeSearch(baseFilter, searchStr, [
       "Company",
       "Target_sentence",
@@ -674,14 +751,19 @@ export const companyUniverse = async (
     const isPaginated = pagination !== "false";
     let baseFilter;
     if (country || company || sector) {
-  baseFilter = {
-    ...(country && { Country: country }),
-    ...(company && { Company: typeof(company)==="string"?company.replace(/['"]+/g, "").trim():undefined }),
-    ...(sector && { sector_code__1__NAICS_: sector }),
-  };
-} else {
-  baseFilter = {};
-}
+      baseFilter = {
+        ...(country && { Country: country }),
+        ...(company && {
+          Company:
+            typeof company === "string"
+              ? company.replace(/['"]+/g, "").trim()
+              : undefined,
+        }),
+        ...(sector && { sector_code__1__NAICS_: sector }),
+      };
+    } else {
+      baseFilter = {};
+    }
     const whereClause = safeSearch(baseFilter, searchStr, [
       "Company",
       "Country",
@@ -788,7 +870,7 @@ export const saveSearch = async (
     });
     response.status = 200;
     response.message = {
-      message: `search saved successfully`,
+      message: `Search saved successfully`,
       search: newSearch,
     };
   } catch (err) {
@@ -824,6 +906,7 @@ export const getFiltersByTableName = async (
         select: {
           Country: true,
           SectorCode1: true,
+          SectorName1: true,
           Company: true,
           SentenceTargetYear: true,
         },
@@ -834,6 +917,7 @@ export const getFiltersByTableName = async (
           Country: true,
           Company: true,
           sector_code__1__NAICS_: true,
+          sector_name__1__NAICS_: true,
         },
       });
     } else if (tableName === "sentenceAllView") {
@@ -841,6 +925,7 @@ export const getFiltersByTableName = async (
         select: {
           Country: true,
           SectorCode1: true,
+          SectorName1: true,
           Company: true,
           SentenceTargetYear: true,
         },
@@ -886,12 +971,25 @@ export const getFiltersByTableName = async (
       ),
     ];
 
+    const uniqueSectorNames = [
+      ...new Set(
+        getFilter
+          .map((item: any) =>
+            tableName === "companyUniverse"
+              ? item.sector_name__1__NAICS_
+              : item.SectorName1
+          )
+          .filter(Boolean)
+      ),
+    ];
+
     response.status = 200;
     response.message = {
       uniqueCountries,
       uniqueCompanies,
       targetYears,
       uniqueSector,
+      uniqueSectorNames,
     };
   } catch (err) {
     response.status = 400;
