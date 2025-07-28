@@ -4,7 +4,7 @@ dotenv.config();
 const accessSecret = process.env.ACCESS_TOKEN_SECRET;
 const refreshSecret = process.env.REFRESH_TOKEN_SECRET;
 export const generateAccessToken = (userId) => {
-    return jwt.sign({ id: userId }, accessSecret, { expiresIn: '30m' });
+    return jwt.sign({ id: userId }, accessSecret, { expiresIn: '10m' });
 };
 export const generateRefreshToken = (userId) => {
     return jwt.sign({ id: userId }, refreshSecret, { expiresIn: '12h' });
@@ -14,7 +14,7 @@ export const setAuthCookies = (res, accessToken, refreshToken) => {
         httpOnly: true,
         secure: false,
         sameSite: 'strict',
-        maxAge: 30 * 60 * 1000,
+        maxAge: 10 * 60 * 1000,
     });
     res.cookie('refreshToken', refreshToken, {
         httpOnly: true,
