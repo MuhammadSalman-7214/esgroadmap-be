@@ -3,13 +3,13 @@ import { safeSearch } from "../../utils/search.js";
 export const carbonReduction = async (req, res) => {
     let response = {};
     try {
-        const { search, pagination = "true", country, company, year, sector, } = req.query;
+        const { search, pagination = "true", country, company, year, sector, sectorName, } = req.query;
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const isPaginated = pagination !== "false";
         const searchStr = typeof search === "string" ? search : "";
         let baseFilter;
-        if (country || company || year || sector) {
+        if (country || company || year || sector || sectorName) {
             baseFilter = {
                 sentence_carbon: 1,
                 ...(country && { Country: country }),
@@ -19,6 +19,7 @@ export const carbonReduction = async (req, res) => {
                         : undefined,
                 }),
                 ...(sector && { SectorCode1: sector }),
+                ...(sectorName && { SectorName1: sectorName }),
                 ...(year && {
                     SentenceTargetYear: {
                         contains: year,
@@ -92,13 +93,13 @@ export const carbonReduction = async (req, res) => {
 export const wasteAndRecycling = async (req, res) => {
     let response = {};
     try {
-        const { search, pagination = "true", country, company, year, sector, } = req.query;
+        const { search, pagination = "true", country, company, year, sector, sectorName, } = req.query;
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const isPaginated = pagination !== "false";
         const searchStr = typeof search === "string" ? search : "";
         let baseFilter;
-        if (country || company || year || sector) {
+        if (country || company || year || sector || sectorName) {
             baseFilter = {
                 sentence_waste: 1,
                 ...(country && { Country: country }),
@@ -108,6 +109,7 @@ export const wasteAndRecycling = async (req, res) => {
                         : undefined,
                 }),
                 ...(sector && { SectorCode1: sector }),
+                ...(sectorName && { SectorName1: sectorName }),
                 ...(year && {
                     SentenceTargetYear: {
                         contains: year,
@@ -181,13 +183,13 @@ export const wasteAndRecycling = async (req, res) => {
 export const waterManagement = async (req, res) => {
     let response = {};
     try {
-        const { search, pagination = "true", country, company, year, sector, } = req.query;
+        const { search, pagination = "true", country, company, year, sector, sectorName, } = req.query;
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const isPaginated = pagination !== "false";
         const searchStr = typeof search === "string" ? search : "";
         let baseFilter;
-        if (country || company || year || sector) {
+        if (country || company || year || sector || sectorName) {
             baseFilter = {
                 sentence_water: 1,
                 ...(country && { Country: country }),
@@ -197,6 +199,7 @@ export const waterManagement = async (req, res) => {
                         : undefined,
                 }),
                 ...(sector && { SectorCode1: sector }),
+                ...(sectorName && { SectorName1: sectorName }),
                 ...(year && {
                     SentenceTargetYear: {
                         contains: year,
@@ -270,13 +273,13 @@ export const waterManagement = async (req, res) => {
 export const sentenceGender = async (req, res) => {
     let response = {};
     try {
-        const { search, pagination = "true", country, company, year, sector, } = req.query;
+        const { search, pagination = "true", country, company, year, sector, sectorName, } = req.query;
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const isPaginated = pagination !== "false";
         const searchStr = typeof search === "string" ? search : "";
         let baseFilter;
-        if (country || company || year || sector) {
+        if (country || company || year || sector || sectorName) {
             baseFilter = {
                 sentence_gender: 1,
                 ...(country && { Country: country }),
@@ -286,6 +289,7 @@ export const sentenceGender = async (req, res) => {
                         : undefined,
                 }),
                 ...(sector && { SectorCode1: sector }),
+                ...(sectorName && { SectorName1: sectorName }),
                 ...(year && {
                     SentenceTargetYear: {
                         contains: year,
@@ -359,13 +363,13 @@ export const sentenceGender = async (req, res) => {
 export const supplyChain = async (req, res) => {
     let response = {};
     try {
-        const { search, pagination = "true", country, company, year, sector, } = req.query;
+        const { search, pagination = "true", country, company, year, sector, sectorName, } = req.query;
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const isPaginated = pagination !== "false";
         const searchStr = typeof search === "string" ? search : "";
         let baseFilter;
-        if (country || company || year || sector) {
+        if (country || company || year || sector || sectorName) {
             baseFilter = {
                 sentence_suppliers: 1,
                 ...(country && { Country: country }),
@@ -375,6 +379,7 @@ export const supplyChain = async (req, res) => {
                         : undefined,
                 }),
                 ...(sector && { SectorCode1: sector }),
+                ...(sectorName && { SectorName1: sectorName }),
                 ...(year && {
                     SentenceTargetYear: {
                         contains: year,
@@ -448,13 +453,13 @@ export const supplyChain = async (req, res) => {
 export const renewables = async (req, res) => {
     let response = {};
     try {
-        const { search, pagination = "true", country, company, year, sector, } = req.query;
+        const { search, pagination = "true", country, company, year, sector, sectorName, } = req.query;
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const isPaginated = pagination !== "false";
         const searchStr = typeof search === "string" ? search : "";
         let baseFilter;
-        if (country || company || year || sector) {
+        if (country || company || year || sector || sectorName) {
             baseFilter = {
                 sentence_renewables: 1,
                 ...(country && { Country: country }),
@@ -464,6 +469,7 @@ export const renewables = async (req, res) => {
                         : undefined,
                 }),
                 ...(sector && { SectorCode1: sector }),
+                ...(sectorName && { SectorName1: sectorName }),
                 ...(year && {
                     SentenceTargetYear: {
                         contains: year,
@@ -537,13 +543,13 @@ export const renewables = async (req, res) => {
 export const allSentence = async (req, res) => {
     let response = {};
     try {
-        const { search, country, pagination = "true", company, year, sector, } = req.query;
+        const { search, country, pagination = "true", company, year, sector, sectorName } = req.query;
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const isPaginated = pagination !== "false";
         const searchStr = typeof search === "string" ? search : "";
         let baseFilter;
-        if (country || company || year || sector) {
+        if (country || company || year || sector || sectorName) {
             baseFilter = {
                 ...(country && { Country: country }),
                 ...(company && {
@@ -552,6 +558,7 @@ export const allSentence = async (req, res) => {
                         : undefined,
                 }),
                 ...(sector && { SectorCode1: sector }),
+                ...(sectorName && { SectorName1: sectorName }),
                 ...(year && {
                     SentenceTargetYear: {
                         contains: year,
@@ -628,11 +635,11 @@ export const companyUniverse = async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
-        const { search, pagination = "true", country, company, sector } = req.query;
+        const { search, pagination = "true", country, company, sector, sectorName, } = req.query;
         const searchStr = typeof search === "string" ? search : "";
         const isPaginated = pagination !== "false";
         let baseFilter;
-        if (country || company || sector) {
+        if (country || company || sector || sectorName) {
             baseFilter = {
                 ...(country && { Country: country }),
                 ...(company && {
@@ -641,6 +648,7 @@ export const companyUniverse = async (req, res) => {
                         : undefined,
                 }),
                 ...(sector && { sector_code__1__NAICS_: sector }),
+                ...(sectorName && { sector_name__1__NAICS_: sectorName }),
             };
         }
         else {
