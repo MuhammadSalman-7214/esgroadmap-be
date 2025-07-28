@@ -12,14 +12,14 @@ export const generateRefreshToken = (userId) => {
 export const setAuthCookies = (res, accessToken, refreshToken) => {
     res.cookie('accessToken', accessToken, {
         httpOnly: true,
-        secure: false,
-        sameSite: 'strict',
+        secure: true,
+        sameSite: 'none',
         maxAge: 10 * 60 * 1000,
     });
     res.cookie('refreshToken', refreshToken, {
         httpOnly: true,
-        secure: false,
-        sameSite: 'strict',
+        secure: true,
+        sameSite: 'none',
         maxAge: 12 * 60 * 60 * 1000,
     });
 };
