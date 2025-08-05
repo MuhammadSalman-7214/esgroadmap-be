@@ -37,8 +37,8 @@ export const carbonReduction = async (
 
             return {
               upload_date: {
-                gte: startDate.toISOString(),
-                lt: endDate.toISOString(),
+                gte: startDate,
+                lt: endDate,
               },
             };
           })()),
@@ -158,8 +158,8 @@ export const wasteAndRecycling = async (
 
             return {
               upload_date: {
-                gte: startDate.toISOString(),
-                lt: endDate.toISOString(),
+                gte: startDate,
+                lt: endDate,
               },
             };
           })()),
@@ -279,8 +279,8 @@ export const waterManagement = async (
 
             return {
               upload_date: {
-                gte: startDate.toISOString(),
-                lt: endDate.toISOString(),
+                gte: startDate,
+                lt: endDate,
               },
             };
           })()),
@@ -400,8 +400,8 @@ export const sentenceGender = async (
 
             return {
               upload_date: {
-                gte: startDate.toISOString(),
-                lt: endDate.toISOString(),
+                gte: startDate,
+                lt: endDate,
               },
             };
           })()),
@@ -521,8 +521,8 @@ export const supplyChain = async (
 
             return {
               upload_date: {
-                gte: startDate.toISOString(),
-                lt: endDate.toISOString(),
+                gte: startDate,
+                lt: endDate,
               },
             };
           })()),
@@ -642,8 +642,8 @@ export const renewables = async (
 
             return {
               upload_date: {
-                gte: startDate.toISOString(),
-                lt: endDate.toISOString(),
+                gte: startDate,
+                lt: endDate,
               },
             };
           })()),
@@ -759,8 +759,8 @@ export const allSentence = async (
 
             return {
               upload_date: {
-                gte: startDate.toISOString(),
-                lt: endDate.toISOString(),
+                gte: startDate,
+                lt: endDate,
               },
             };
           })()),
