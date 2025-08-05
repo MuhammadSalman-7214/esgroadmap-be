@@ -19,8 +19,8 @@ export const carbonReduction = async (req, res) => {
                         const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
                         return {
                             upload_date: {
-                                gte: startDate.toISOString(),
-                                lt: endDate.toISOString(),
+                                gte: startDate,
+                                lt: endDate,
                             },
                         };
                     })()),
@@ -121,8 +121,8 @@ export const wasteAndRecycling = async (req, res) => {
                         const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
                         return {
                             upload_date: {
-                                gte: startDate.toISOString(),
-                                lt: endDate.toISOString(),
+                                gte: startDate,
+                                lt: endDate,
                             },
                         };
                     })()),
@@ -223,8 +223,8 @@ export const waterManagement = async (req, res) => {
                         const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
                         return {
                             upload_date: {
-                                gte: startDate.toISOString(),
-                                lt: endDate.toISOString(),
+                                gte: startDate,
+                                lt: endDate,
                             },
                         };
                     })()),
@@ -325,8 +325,8 @@ export const sentenceGender = async (req, res) => {
                         const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
                         return {
                             upload_date: {
-                                gte: startDate.toISOString(),
-                                lt: endDate.toISOString(),
+                                gte: startDate,
+                                lt: endDate,
                             },
                         };
                     })()),
@@ -427,8 +427,8 @@ export const supplyChain = async (req, res) => {
                         const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
                         return {
                             upload_date: {
-                                gte: startDate.toISOString(),
-                                lt: endDate.toISOString(),
+                                gte: startDate,
+                                lt: endDate,
                             },
                         };
                     })()),
@@ -529,8 +529,8 @@ export const renewables = async (req, res) => {
                         const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
                         return {
                             upload_date: {
-                                gte: startDate.toISOString(),
-                                lt: endDate.toISOString(),
+                                gte: startDate,
+                                lt: endDate,
                             },
                         };
                     })()),
@@ -630,8 +630,8 @@ export const allSentence = async (req, res) => {
                         const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
                         return {
                             upload_date: {
-                                gte: startDate.toISOString(),
-                                lt: endDate.toISOString(),
+                                gte: startDate,
+                                lt: endDate,
                             },
                         };
                     })()),
