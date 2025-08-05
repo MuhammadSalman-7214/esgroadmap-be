@@ -6,8 +6,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { runDailyReportJob } from './utils/dailyReportJob.js';
 import cron from "node-cron";
-cron.schedule("59 23 * * *", runDailyReportJob);
-
+cron.schedule("0 0 * * 1", runDailyReportJob);
 export const prisma = new PrismaClient();
 
 dotenv.config();

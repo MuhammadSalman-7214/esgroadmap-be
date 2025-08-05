@@ -931,6 +931,7 @@ export const getFiltersByTableName = async (
           SectorName1: true,
           Company: true,
           SentenceTargetYear: true,
+          upload_date: true,
         },
       });
     } else if (tableName === "companyUniverse") {
@@ -950,6 +951,7 @@ export const getFiltersByTableName = async (
           SectorName1: true,
           Company: true,
           SentenceTargetYear: true,
+          upload_date: true,
         },
       });
     } else {
@@ -958,11 +960,11 @@ export const getFiltersByTableName = async (
     }
 
     const uniqueCountries = [
-      ...new Set(getFilter.map((item: any) => item.Country).filter(Boolean)),
+      ...new Set(getFilter.map((item: any) => item.Country).filter(Boolean).sort()),
     ];
 
     const uniqueCompanies = [
-      ...new Set(getFilter.map((item: any) => item.Company).filter(Boolean)),
+      ...new Set(getFilter.map((item: any) => item.Company).filter(Boolean).sort()),
     ];
 
     const targetYears = [
@@ -990,6 +992,7 @@ export const getFiltersByTableName = async (
               : item.SectorCode1
           )
           .filter(Boolean)
+          .sort()
       ),
     ];
 
@@ -1002,11 +1005,37 @@ export const getFiltersByTableName = async (
               : item.SectorName1
           )
           .filter(Boolean)
+          .sort()
       ),
     ];
 
+    const uniqueDates = [
+  ...new Set(
+    getFilter
+      .map((item: any) => {
+        const d = item.upload_date;
+        if (!d) return null;
+        const dateObj = new Date(d);
+        if (isNaN(dateObj.getTime())) return null;
+
+        const day = String(dateObj.getDate()).padStart(2, '0');
+        const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+        const year = dateObj.getFullYear();
+        return `${day}-${month}-${year}`;
+      })
+      .filter(Boolean) // Remove nulls
+  ),
+].sort((a: any, b: any) => {
+  const [dayA, monthA, yearA] = a.split("-").map(Number);
+  const [dayB, monthB, yearB] = b.split("-").map(Number);
+  return new Date(yearA, monthA - 1, dayA).getTime() - new Date(yearB, monthB - 1, dayB).getTime();
+});
+
+
+
     response.status = 200;
     response.message = {
+      uniqueDates,
       uniqueCountries,
       uniqueCompanies,
       targetYears,
