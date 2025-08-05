@@ -37,8 +37,8 @@ export const carbonReduction = async (
 
             return {
               upload_date: {
-                gte: startDate,
-                lt: endDate,
+                gte: startDate.toISOString(),
+                lt: endDate.toISOString(),
               },
             };
           })()),
@@ -158,8 +158,8 @@ export const wasteAndRecycling = async (
 
             return {
               upload_date: {
-                gte: startDate,
-                lt: endDate,
+                gte: startDate.toISOString(),
+                lt: endDate.toISOString(),
               },
             };
           })()),
@@ -279,8 +279,8 @@ export const waterManagement = async (
 
             return {
               upload_date: {
-                gte: startDate,
-                lt: endDate,
+                gte: startDate.toISOString(),
+                lt: endDate.toISOString(),
               },
             };
           })()),
@@ -400,8 +400,8 @@ export const sentenceGender = async (
 
             return {
               upload_date: {
-                gte: startDate,
-                lt: endDate,
+                gte: startDate.toISOString(),
+                lt: endDate.toISOString(),
               },
             };
           })()),
@@ -521,8 +521,8 @@ export const supplyChain = async (
 
             return {
               upload_date: {
-                gte: startDate,
-                lt: endDate,
+                gte: startDate.toISOString(),
+                lt: endDate.toISOString(),
               },
             };
           })()),
@@ -642,8 +642,8 @@ export const renewables = async (
 
             return {
               upload_date: {
-                gte: startDate,
-                lt: endDate,
+                gte: startDate.toISOString(),
+                lt: endDate.toISOString(),
               },
             };
           })()),
@@ -759,8 +759,8 @@ export const allSentence = async (
 
             return {
               upload_date: {
-                gte: startDate,
-                lt: endDate,
+                gte: startDate.toISOString(),
+                lt: endDate.toISOString(),
               },
             };
           })()),
@@ -1126,11 +1126,11 @@ export const getFiltersByTableName = async (
             const dateObj = new Date(d);
             if (isNaN(dateObj.getTime())) return null;
 
-            const day = String(dateObj.getUTCDate()).padStart(2, "0");
-            const month = String(dateObj.getUTCMonth() + 1).padStart(2, "0");
-            const year = dateObj.getUTCFullYear();
+const day = String(dateObj.getUTCDate()).padStart(2, "0");
+const month = String(dateObj.getUTCMonth() + 1).padStart(2, "0");
+const year = dateObj.getUTCFullYear();
 
-            return `${day}-${month}-${year}`;
+return `${day}-${month}-${year}`;
           })
           .filter(Boolean) // Remove nulls
       ),
