@@ -787,6 +787,7 @@ export const getFiltersByTableName = async (req, res) => {
                     SectorName1: true,
                     Company: true,
                     SentenceTargetYear: true,
+                    upload_date: true,
                 },
             });
         }
@@ -808,6 +809,7 @@ export const getFiltersByTableName = async (req, res) => {
                     SectorName1: true,
                     Company: true,
                     SentenceTargetYear: true,
+                    upload_date: true,
                 },
             });
         }
@@ -816,10 +818,10 @@ export const getFiltersByTableName = async (req, res) => {
             return;
         }
         const uniqueCountries = [
-            ...new Set(getFilter.map((item) => item.Country).filter(Boolean)),
+            ...new Set(getFilter.map((item) => item.Country).filter(Boolean).sort()),
         ];
         const uniqueCompanies = [
-            ...new Set(getFilter.map((item) => item.Company).filter(Boolean)),
+            ...new Set(getFilter.map((item) => item.Company).filter(Boolean).sort()),
         ];
         const targetYears = [
             ...new Set(getFilter
@@ -837,17 +839,41 @@ export const getFiltersByTableName = async (req, res) => {
                 .map((item) => tableName === "companyUniverse"
                 ? item.sector_code__1__NAICS_
                 : item.SectorCode1)
-                .filter(Boolean)),
+                .filter(Boolean)
+                .sort()),
         ];
         const uniqueSectorNames = [
             ...new Set(getFilter
                 .map((item) => tableName === "companyUniverse"
                 ? item.sector_name__1__NAICS_
                 : item.SectorName1)
-                .filter(Boolean)),
+                .filter(Boolean)
+                .sort()),
         ];
+        const uniqueDates = [
+            ...new Set(getFilter
+                .map((item) => {
+                const d = item.upload_date;
+                if (!d)
+                    return null;
+                const dateObj = new Date(d);
+                if (isNaN(dateObj.getTime()))
+                    return null;
+                const day = String(dateObj.getDate()).padStart(2, '0');
+                const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+                const year = dateObj.getFullYear();
+                return `${day}-${month}-${year}`;
+            })
+                .filter(Boolean) // Remove nulls
+            ),
+        ].sort((a, b) => {
+            const [dayA, monthA, yearA] = a.split("-").map(Number);
+            const [dayB, monthB, yearB] = b.split("-").map(Number);
+            return new Date(yearA, monthA - 1, dayA).getTime() - new Date(yearB, monthB - 1, dayB).getTime();
+        });
         response.status = 200;
         response.message = {
+            uniqueDates,
             uniqueCountries,
             uniqueCompanies,
             targetYears,
