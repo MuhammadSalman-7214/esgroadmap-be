@@ -949,9 +949,9 @@ export const getFiltersByTableName = async (req, res) => {
                 const dateObj = new Date(d);
                 if (isNaN(dateObj.getTime()))
                     return null;
-                const day = String(dateObj.getDate()).padStart(2, "0");
-                const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-                const year = dateObj.getFullYear();
+                const day = String(dateObj.getUTCDate()).padStart(2, "0");
+                const month = String(dateObj.getUTCMonth() + 1).padStart(2, "0");
+                const year = dateObj.getUTCFullYear();
                 return `${day}-${month}-${year}`;
             })
                 .filter(Boolean) // Remove nulls
