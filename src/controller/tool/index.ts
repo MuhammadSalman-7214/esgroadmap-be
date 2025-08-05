@@ -19,15 +19,29 @@ export const carbonReduction = async (
       year,
       sector,
       sectorName,
+      date,
     } = req.query;
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const isPaginated = pagination !== "false";
     const searchStr = typeof search === "string" ? search : "";
     let baseFilter;
-    if (country || company || year || sector || sectorName) {
+    if (country || company || year || sector || sectorName || date) {
       baseFilter = {
         sentence_carbon: 1,
+        ...(date &&
+          (() => {
+            const [day, month, year] = String(date).split("-").map(Number);
+            const startDate = new Date(year, month - 1, day, 0, 0, 0); // 00:00:00
+            const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
+
+            return {
+              upload_date: {
+                gte: startDate.toISOString(),
+                lt: endDate.toISOString(),
+              },
+            };
+          })()),
         ...(country && { Country: country }),
         ...(company && {
           Company:
@@ -126,15 +140,29 @@ export const wasteAndRecycling = async (
       year,
       sector,
       sectorName,
+      date,
     } = req.query;
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const isPaginated = pagination !== "false";
     const searchStr = typeof search === "string" ? search : "";
     let baseFilter;
-    if (country || company || year || sector || sectorName) {
+    if (country || company || year || sector || sectorName || date) {
       baseFilter = {
         sentence_waste: 1,
+        ...(date &&
+          (() => {
+            const [day, month, year] = String(date).split("-").map(Number);
+            const startDate = new Date(year, month - 1, day, 0, 0, 0); // 00:00:00
+            const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
+
+            return {
+              upload_date: {
+                gte: startDate.toISOString(),
+                lt: endDate.toISOString(),
+              },
+            };
+          })()),
         ...(country && { Country: country }),
         ...(company && {
           Company:
@@ -233,15 +261,29 @@ export const waterManagement = async (
       year,
       sector,
       sectorName,
+      date,
     } = req.query;
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const isPaginated = pagination !== "false";
     const searchStr = typeof search === "string" ? search : "";
     let baseFilter;
-    if (country || company || year || sector || sectorName) {
+    if (country || company || year || sector || sectorName || date) {
       baseFilter = {
         sentence_water: 1,
+        ...(date &&
+          (() => {
+            const [day, month, year] = String(date).split("-").map(Number);
+            const startDate = new Date(year, month - 1, day, 0, 0, 0); // 00:00:00
+            const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
+
+            return {
+              upload_date: {
+                gte: startDate.toISOString(),
+                lt: endDate.toISOString(),
+              },
+            };
+          })()),
         ...(country && { Country: country }),
         ...(company && {
           Company:
@@ -340,15 +382,29 @@ export const sentenceGender = async (
       year,
       sector,
       sectorName,
+      date,
     } = req.query;
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const isPaginated = pagination !== "false";
     const searchStr = typeof search === "string" ? search : "";
     let baseFilter;
-    if (country || company || year || sector || sectorName) {
+    if (country || company || year || sector || sectorName || date) {
       baseFilter = {
         sentence_gender: 1,
+        ...(date &&
+          (() => {
+            const [day, month, year] = String(date).split("-").map(Number);
+            const startDate = new Date(year, month - 1, day, 0, 0, 0); // 00:00:00
+            const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
+
+            return {
+              upload_date: {
+                gte: startDate.toISOString(),
+                lt: endDate.toISOString(),
+              },
+            };
+          })()),
         ...(country && { Country: country }),
         ...(company && {
           Company:
@@ -447,15 +503,29 @@ export const supplyChain = async (
       year,
       sector,
       sectorName,
+      date,
     } = req.query;
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const isPaginated = pagination !== "false";
     const searchStr = typeof search === "string" ? search : "";
     let baseFilter;
-    if (country || company || year || sector || sectorName) {
+    if (country || company || year || sector || sectorName || date) {
       baseFilter = {
         sentence_suppliers: 1,
+        ...(date &&
+          (() => {
+            const [day, month, year] = String(date).split("-").map(Number);
+            const startDate = new Date(year, month - 1, day, 0, 0, 0); // 00:00:00
+            const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
+
+            return {
+              upload_date: {
+                gte: startDate.toISOString(),
+                lt: endDate.toISOString(),
+              },
+            };
+          })()),
         ...(country && { Country: country }),
         ...(company && {
           Company:
@@ -554,15 +624,29 @@ export const renewables = async (
       year,
       sector,
       sectorName,
+      date,
     } = req.query;
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const isPaginated = pagination !== "false";
     const searchStr = typeof search === "string" ? search : "";
     let baseFilter;
-    if (country || company || year || sector || sectorName) {
+    if (country || company || year || sector || sectorName || date) {
       baseFilter = {
         sentence_renewables: 1,
+        ...(date &&
+          (() => {
+            const [day, month, year] = String(date).split("-").map(Number);
+            const startDate = new Date(year, month - 1, day, 0, 0, 0); // 00:00:00
+            const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
+
+            return {
+              upload_date: {
+                gte: startDate.toISOString(),
+                lt: endDate.toISOString(),
+              },
+            };
+          })()),
         ...(country && { Country: country }),
         ...(company && {
           Company:
@@ -657,15 +741,29 @@ export const allSentence = async (
       company,
       year,
       sector,
-      sectorName
+      sectorName,
+      date,
     } = req.query;
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const isPaginated = pagination !== "false";
     const searchStr = typeof search === "string" ? search : "";
     let baseFilter;
-    if (country || company || year || sector || sectorName) {
+    if (country || company || year || sector || sectorName || date) {
       baseFilter = {
+        ...(date &&
+          (() => {
+            const [day, month, year] = String(date).split("-").map(Number);
+            const startDate = new Date(year, month - 1, day, 0, 0, 0); // 00:00:00
+            const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
+
+            return {
+              upload_date: {
+                gte: startDate.toISOString(),
+                lt: endDate.toISOString(),
+              },
+            };
+          })()),
         ...(country && { Country: country }),
         ...(company && {
           Company:
@@ -960,11 +1058,21 @@ export const getFiltersByTableName = async (
     }
 
     const uniqueCountries = [
-      ...new Set(getFilter.map((item: any) => item.Country).filter(Boolean).sort()),
+      ...new Set(
+        getFilter
+          .map((item: any) => item.Country)
+          .filter(Boolean)
+          .sort()
+      ),
     ];
 
     const uniqueCompanies = [
-      ...new Set(getFilter.map((item: any) => item.Company).filter(Boolean).sort()),
+      ...new Set(
+        getFilter
+          .map((item: any) => item.Company)
+          .filter(Boolean)
+          .sort()
+      ),
     ];
 
     const targetYears = [
@@ -1010,28 +1118,29 @@ export const getFiltersByTableName = async (
     ];
 
     const uniqueDates = [
-  ...new Set(
-    getFilter
-      .map((item: any) => {
-        const d = item.upload_date;
-        if (!d) return null;
-        const dateObj = new Date(d);
-        if (isNaN(dateObj.getTime())) return null;
+      ...new Set(
+        getFilter
+          .map((item: any) => {
+            const d = item.upload_date;
+            if (!d) return null;
+            const dateObj = new Date(d);
+            if (isNaN(dateObj.getTime())) return null;
 
-        const day = String(dateObj.getDate()).padStart(2, '0');
-        const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-        const year = dateObj.getFullYear();
-        return `${day}-${month}-${year}`;
-      })
-      .filter(Boolean) // Remove nulls
-  ),
-].sort((a: any, b: any) => {
-  const [dayA, monthA, yearA] = a.split("-").map(Number);
-  const [dayB, monthB, yearB] = b.split("-").map(Number);
-  return new Date(yearA, monthA - 1, dayA).getTime() - new Date(yearB, monthB - 1, dayB).getTime();
-});
-
-
+            const day = String(dateObj.getDate()).padStart(2, "0");
+            const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+            const year = dateObj.getFullYear();
+            return `${day}-${month}-${year}`;
+          })
+          .filter(Boolean) // Remove nulls
+      ),
+    ].sort((a: any, b: any) => {
+      const [dayA, monthA, yearA] = a.split("-").map(Number);
+      const [dayB, monthB, yearB] = b.split("-").map(Number);
+      return (
+        new Date(yearA, monthA - 1, dayA).getTime() -
+        new Date(yearB, monthB - 1, dayB).getTime()
+      );
+    });
 
     response.status = 200;
     response.message = {
