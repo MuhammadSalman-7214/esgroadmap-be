@@ -15,12 +15,12 @@ export const carbonReduction = async (req, res) => {
                 ...(date &&
                     (() => {
                         const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(year, month - 1, day, 0, 0, 0); // 00:00:00
-                        const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
+                        const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
+                        const endDate = new Date(Date.UTC(year, month - 1, day + 1, 0, 0, 0));
                         return {
                             upload_date: {
-                                gte: startDate,
-                                lt: endDate,
+                                gte: startDate.toISOString(),
+                                lt: endDate.toISOString(),
                             },
                         };
                     })()),
@@ -117,12 +117,12 @@ export const wasteAndRecycling = async (req, res) => {
                 ...(date &&
                     (() => {
                         const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(year, month - 1, day, 0, 0, 0); // 00:00:00
-                        const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
+                        const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
+                        const endDate = new Date(Date.UTC(year, month - 1, day + 1, 0, 0, 0));
                         return {
                             upload_date: {
-                                gte: startDate,
-                                lt: endDate,
+                                gte: startDate.toISOString(),
+                                lt: endDate.toISOString(),
                             },
                         };
                     })()),
@@ -219,12 +219,12 @@ export const waterManagement = async (req, res) => {
                 ...(date &&
                     (() => {
                         const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(year, month - 1, day, 0, 0, 0); // 00:00:00
-                        const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
+                        const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
+                        const endDate = new Date(Date.UTC(year, month - 1, day + 1, 0, 0, 0));
                         return {
                             upload_date: {
-                                gte: startDate,
-                                lt: endDate,
+                                gte: startDate.toISOString(),
+                                lt: endDate.toISOString(),
                             },
                         };
                     })()),
@@ -321,12 +321,12 @@ export const sentenceGender = async (req, res) => {
                 ...(date &&
                     (() => {
                         const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(year, month - 1, day, 0, 0, 0); // 00:00:00
-                        const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
+                        const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
+                        const endDate = new Date(Date.UTC(year, month - 1, day + 1, 0, 0, 0));
                         return {
                             upload_date: {
-                                gte: startDate,
-                                lt: endDate,
+                                gte: startDate.toISOString(),
+                                lt: endDate.toISOString(),
                             },
                         };
                     })()),
@@ -423,12 +423,12 @@ export const supplyChain = async (req, res) => {
                 ...(date &&
                     (() => {
                         const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(year, month - 1, day, 0, 0, 0); // 00:00:00
-                        const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
+                        const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
+                        const endDate = new Date(Date.UTC(year, month - 1, day + 1, 0, 0, 0));
                         return {
                             upload_date: {
-                                gte: startDate,
-                                lt: endDate,
+                                gte: startDate.toISOString(),
+                                lt: endDate.toISOString(),
                             },
                         };
                     })()),
@@ -525,12 +525,12 @@ export const renewables = async (req, res) => {
                 ...(date &&
                     (() => {
                         const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(year, month - 1, day, 0, 0, 0); // 00:00:00
-                        const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
+                        const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
+                        const endDate = new Date(Date.UTC(year, month - 1, day + 1, 0, 0, 0));
                         return {
                             upload_date: {
-                                gte: startDate,
-                                lt: endDate,
+                                gte: startDate.toISOString(),
+                                lt: endDate.toISOString(),
                             },
                         };
                     })()),
@@ -626,12 +626,12 @@ export const allSentence = async (req, res) => {
                 ...(date &&
                     (() => {
                         const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(year, month - 1, day, 0, 0, 0); // 00:00:00
-                        const endDate = new Date(year, month - 1, day + 1, 0, 0, 0); // next day 00:00:00
+                        const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
+                        const endDate = new Date(Date.UTC(year, month - 1, day + 1, 0, 0, 0));
                         return {
                             upload_date: {
-                                gte: startDate,
-                                lt: endDate,
+                                gte: startDate.toISOString(),
+                                lt: endDate.toISOString(),
                             },
                         };
                     })()),
