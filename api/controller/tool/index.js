@@ -15,8 +15,8 @@ export const carbonReduction = async (req, res) => {
                 ...(date &&
                     (() => {
                         const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
-                        const endDate = new Date(Date.UTC(year, month - 1, day + 1, 0, 0, 0));
+                        const startDate = new Date(Date.UTC(year, month, day, 0, 0, 0));
+                        const endDate = new Date(Date.UTC(year, month, day + 1, 0, 0, 0));
                         return {
                             upload_date: {
                                 gte: startDate.toISOString(),
@@ -117,8 +117,8 @@ export const wasteAndRecycling = async (req, res) => {
                 ...(date &&
                     (() => {
                         const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
-                        const endDate = new Date(Date.UTC(year, month - 1, day + 1, 0, 0, 0));
+                        const startDate = new Date(Date.UTC(year, month, day, 0, 0, 0));
+                        const endDate = new Date(Date.UTC(year, month, day + 1, 0, 0, 0));
                         return {
                             upload_date: {
                                 gte: startDate.toISOString(),
@@ -219,8 +219,8 @@ export const waterManagement = async (req, res) => {
                 ...(date &&
                     (() => {
                         const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
-                        const endDate = new Date(Date.UTC(year, month - 1, day + 1, 0, 0, 0));
+                        const startDate = new Date(Date.UTC(year, month, day, 0, 0, 0));
+                        const endDate = new Date(Date.UTC(year, month, day + 1, 0, 0, 0));
                         return {
                             upload_date: {
                                 gte: startDate.toISOString(),
@@ -321,8 +321,8 @@ export const sentenceGender = async (req, res) => {
                 ...(date &&
                     (() => {
                         const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
-                        const endDate = new Date(Date.UTC(year, month - 1, day + 1, 0, 0, 0));
+                        const startDate = new Date(Date.UTC(year, month, day, 0, 0, 0));
+                        const endDate = new Date(Date.UTC(year, month, day + 1, 0, 0, 0));
                         return {
                             upload_date: {
                                 gte: startDate.toISOString(),
@@ -423,8 +423,8 @@ export const supplyChain = async (req, res) => {
                 ...(date &&
                     (() => {
                         const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
-                        const endDate = new Date(Date.UTC(year, month - 1, day + 1, 0, 0, 0));
+                        const startDate = new Date(Date.UTC(year, month, day, 0, 0, 0));
+                        const endDate = new Date(Date.UTC(year, month, day + 1, 0, 0, 0));
                         return {
                             upload_date: {
                                 gte: startDate.toISOString(),
@@ -525,8 +525,8 @@ export const renewables = async (req, res) => {
                 ...(date &&
                     (() => {
                         const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
-                        const endDate = new Date(Date.UTC(year, month - 1, day + 1, 0, 0, 0));
+                        const startDate = new Date(Date.UTC(year, month, day, 0, 0, 0));
+                        const endDate = new Date(Date.UTC(year, month, day + 1, 0, 0, 0));
                         return {
                             upload_date: {
                                 gte: startDate.toISOString(),
@@ -626,8 +626,8 @@ export const allSentence = async (req, res) => {
                 ...(date &&
                     (() => {
                         const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
-                        const endDate = new Date(Date.UTC(year, month - 1, day + 1, 0, 0, 0));
+                        const startDate = new Date(Date.UTC(year, month, day, 0, 0, 0));
+                        const endDate = new Date(Date.UTC(year, month, day + 1, 0, 0, 0));
                         return {
                             upload_date: {
                                 gte: startDate.toISOString(),
@@ -918,7 +918,7 @@ export const getFiltersByTableName = async (req, res) => {
                 .map((item) => item.SentenceTargetYear)
                 .filter(Boolean)
                 .flatMap((val) => val
-                .replace(/[\[\]]/g, "") // remove brackets
+                .replace(/[\[\]]/g, "")
                 .split(",") // split by comma
                 .map((y) => parseInt(y.trim())) // convert to number
                 .filter((y) => !isNaN(y)) // filter invalid
@@ -950,7 +950,7 @@ export const getFiltersByTableName = async (req, res) => {
                 if (isNaN(dateObj.getTime()))
                     return null;
                 const day = String(dateObj.getUTCDate()).padStart(2, "0");
-                const month = String(dateObj.getUTCMonth() + 1).padStart(2, "0");
+                const month = String(dateObj.getUTCMonth()).padStart(2, "0");
                 const year = dateObj.getUTCFullYear();
                 return `${day}-${month}-${year}`;
             })
