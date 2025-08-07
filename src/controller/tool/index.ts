@@ -1000,9 +1000,9 @@ export const getFiltersByTableName = async (
             (val: string) =>
               val
                 .replace(/[\[\]]/g, "")
-                .split(",") // split by comma
-                .map((y) => parseInt(y.trim())) // convert to number
-                .filter((y) => !isNaN(y)) // filter invalid
+                .split(",")
+                .map((y) => parseInt(y.trim()))
+                .filter((y) => !isNaN(y))
           )
       ),
     ].sort((a, b) => a - b);
