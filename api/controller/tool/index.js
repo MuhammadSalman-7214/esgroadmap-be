@@ -862,12 +862,12 @@ export const getFiltersByTableName = async (req, res) => {
                 .filter(Boolean)
                 .sort()),
         ];
-        const uniqueDate = [
+        const uniqueDates = [
             ...new Set(getFilter.map((item) => String(item.upload_date)).filter(Boolean).sort((a, b) => a - b))
         ];
         response.status = 200;
         response.message = {
-            uniqueDate,
+            uniqueDates,
             uniqueCountries,
             uniqueCompanies,
             targetYears,
