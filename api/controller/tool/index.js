@@ -12,18 +12,7 @@ export const carbonReduction = async (req, res) => {
         if (country || company || year || sector || sectorName || date) {
             baseFilter = {
                 sentence_carbon: 1,
-                ...(date &&
-                    (() => {
-                        const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(Date.UTC(year, month, day, 0, 0, 0));
-                        const endDate = new Date(Date.UTC(year, month, day + 1, 0, 0, 0));
-                        return {
-                            upload_date: {
-                                gte: startDate.toISOString(),
-                                lt: endDate.toISOString(),
-                            },
-                        };
-                    })()),
+                ...(date && { upload_date: date }),
                 ...(country && { Country: country }),
                 ...(company && {
                     Company: typeof company === "string"
@@ -114,18 +103,7 @@ export const wasteAndRecycling = async (req, res) => {
         if (country || company || year || sector || sectorName || date) {
             baseFilter = {
                 sentence_waste: 1,
-                ...(date &&
-                    (() => {
-                        const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(Date.UTC(year, month, day, 0, 0, 0));
-                        const endDate = new Date(Date.UTC(year, month, day + 1, 0, 0, 0));
-                        return {
-                            upload_date: {
-                                gte: startDate.toISOString(),
-                                lt: endDate.toISOString(),
-                            },
-                        };
-                    })()),
+                ...(date && { upload_date: date }),
                 ...(country && { Country: country }),
                 ...(company && {
                     Company: typeof company === "string"
@@ -216,18 +194,7 @@ export const waterManagement = async (req, res) => {
         if (country || company || year || sector || sectorName || date) {
             baseFilter = {
                 sentence_water: 1,
-                ...(date &&
-                    (() => {
-                        const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(Date.UTC(year, month, day, 0, 0, 0));
-                        const endDate = new Date(Date.UTC(year, month, day + 1, 0, 0, 0));
-                        return {
-                            upload_date: {
-                                gte: startDate.toISOString(),
-                                lt: endDate.toISOString(),
-                            },
-                        };
-                    })()),
+                ...(date && { upload_date: date }),
                 ...(country && { Country: country }),
                 ...(company && {
                     Company: typeof company === "string"
@@ -318,18 +285,7 @@ export const sentenceGender = async (req, res) => {
         if (country || company || year || sector || sectorName || date) {
             baseFilter = {
                 sentence_gender: 1,
-                ...(date &&
-                    (() => {
-                        const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(Date.UTC(year, month, day, 0, 0, 0));
-                        const endDate = new Date(Date.UTC(year, month, day + 1, 0, 0, 0));
-                        return {
-                            upload_date: {
-                                gte: startDate.toISOString(),
-                                lt: endDate.toISOString(),
-                            },
-                        };
-                    })()),
+                ...(date && { upload_date: date }),
                 ...(country && { Country: country }),
                 ...(company && {
                     Company: typeof company === "string"
@@ -420,18 +376,7 @@ export const supplyChain = async (req, res) => {
         if (country || company || year || sector || sectorName || date) {
             baseFilter = {
                 sentence_suppliers: 1,
-                ...(date &&
-                    (() => {
-                        const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(Date.UTC(year, month, day, 0, 0, 0));
-                        const endDate = new Date(Date.UTC(year, month, day + 1, 0, 0, 0));
-                        return {
-                            upload_date: {
-                                gte: startDate.toISOString(),
-                                lt: endDate.toISOString(),
-                            },
-                        };
-                    })()),
+                ...(date && { upload_date: date }),
                 ...(country && { Country: country }),
                 ...(company && {
                     Company: typeof company === "string"
@@ -522,18 +467,7 @@ export const renewables = async (req, res) => {
         if (country || company || year || sector || sectorName || date) {
             baseFilter = {
                 sentence_renewables: 1,
-                ...(date &&
-                    (() => {
-                        const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(Date.UTC(year, month, day, 0, 0, 0));
-                        const endDate = new Date(Date.UTC(year, month, day + 1, 0, 0, 0));
-                        return {
-                            upload_date: {
-                                gte: startDate.toISOString(),
-                                lt: endDate.toISOString(),
-                            },
-                        };
-                    })()),
+                ...(date && { upload_date: date }),
                 ...(country && { Country: country }),
                 ...(company && {
                     Company: typeof company === "string"
@@ -623,18 +557,7 @@ export const allSentence = async (req, res) => {
         let baseFilter;
         if (country || company || year || sector || sectorName || date) {
             baseFilter = {
-                ...(date &&
-                    (() => {
-                        const [day, month, year] = String(date).split("-").map(Number);
-                        const startDate = new Date(Date.UTC(year, month, day, 0, 0, 0));
-                        const endDate = new Date(Date.UTC(year, month, day + 1, 0, 0, 0));
-                        return {
-                            upload_date: {
-                                gte: startDate.toISOString(),
-                                lt: endDate.toISOString(),
-                            },
-                        };
-                    })()),
+                ...(date && { upload_date: date }),
                 ...(country && { Country: country }),
                 ...(company && {
                     Company: typeof company === "string"
@@ -919,10 +842,9 @@ export const getFiltersByTableName = async (req, res) => {
                 .filter(Boolean)
                 .flatMap((val) => val
                 .replace(/[\[\]]/g, "")
-                .split(",") // split by comma
-                .map((y) => parseInt(y.trim())) // convert to number
-                .filter((y) => !isNaN(y)) // filter invalid
-            )),
+                .split(",")
+                .map((y) => parseInt(y.trim()))
+                .filter((y) => !isNaN(y)))),
         ].sort((a, b) => a - b);
         const uniqueSector = [
             ...new Set(getFilter
@@ -940,31 +862,12 @@ export const getFiltersByTableName = async (req, res) => {
                 .filter(Boolean)
                 .sort()),
         ];
-        const uniqueDates = [
-            ...new Set(getFilter
-                .map((item) => {
-                const d = item.upload_date;
-                if (!d)
-                    return null;
-                const dateObj = new Date(d);
-                if (isNaN(dateObj.getTime()))
-                    return null;
-                const day = String(dateObj.getUTCDate()).padStart(2, "0");
-                const month = String(dateObj.getUTCMonth()).padStart(2, "0");
-                const year = dateObj.getUTCFullYear();
-                return `${day}-${month}-${year}`;
-            })
-                .filter(Boolean) // Remove nulls
-            ),
-        ].sort((a, b) => {
-            const [dayA, monthA, yearA] = a.split("-").map(Number);
-            const [dayB, monthB, yearB] = b.split("-").map(Number);
-            return (new Date(yearA, monthA - 1, dayA).getTime() -
-                new Date(yearB, monthB - 1, dayB).getTime());
-        });
+        const uniqueDate = [
+            ...new Set(getFilter.map((item) => String(item.upload_date)).filter(Boolean).sort((a, b) => a - b))
+        ];
         response.status = 200;
         response.message = {
-            uniqueDates,
+            uniqueDate,
             uniqueCountries,
             uniqueCompanies,
             targetYears,
@@ -974,7 +877,7 @@ export const getFiltersByTableName = async (req, res) => {
     }
     catch (err) {
         response.status = 400;
-        response.message = "Failed to fetch countries";
+        response.message = { message: err.message };
     }
     res.status(response.status).json(response.message);
 };
