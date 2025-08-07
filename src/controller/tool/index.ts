@@ -1033,7 +1033,7 @@ export const getFiltersByTableName = async (
       ),
     ];
 
-    const uniqueDate = [
+    const uniqueDates = [
       ...new Set(
         getFilter.map((item: any) => String(item.upload_date)).filter(Boolean).sort((a: any , b: any) => a - b)
       )
@@ -1041,7 +1041,7 @@ export const getFiltersByTableName = async (
 
     response.status = 200;
     response.message = {
-      uniqueDate,
+      uniqueDates,
       uniqueCountries,
       uniqueCompanies,
       targetYears,
