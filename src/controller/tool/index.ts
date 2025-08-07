@@ -29,19 +29,7 @@ export const carbonReduction = async (
     if (country || company || year || sector || sectorName || date) {
       baseFilter = {
         sentence_carbon: 1,
-        ...(date &&
-          (() => {
-            const [day, month, year] = String(date).split("-").map(Number);
-            const startDate = new Date(Date.UTC(year, month , day, 0, 0, 0)); 
-            const endDate = new Date(Date.UTC(year, month , day + 1, 0, 0, 0)); 
-
-            return {
-              upload_date: {
-                gte: startDate.toISOString(),
-                lt: endDate.toISOString(),
-              },
-            };
-          })()),
+        ...(date && {upload_date : date}),
         ...(country && { Country: country }),
         ...(company && {
           Company:
@@ -150,19 +138,7 @@ export const wasteAndRecycling = async (
     if (country || company || year || sector || sectorName || date) {
       baseFilter = {
         sentence_waste: 1,
-        ...(date &&
-          (() => {
-            const [day, month, year] = String(date).split("-").map(Number);
-            const startDate = new Date(Date.UTC(year, month , day, 0, 0, 0)); 
-            const endDate = new Date(Date.UTC(year, month , day + 1, 0, 0, 0)); 
-
-            return {
-              upload_date: {
-                gte: startDate.toISOString(),
-                lt: endDate.toISOString(),
-              },
-            };
-          })()),
+        ...(date && {upload_date : date}),
         ...(country && { Country: country }),
         ...(company && {
           Company:
@@ -271,19 +247,7 @@ export const waterManagement = async (
     if (country || company || year || sector || sectorName || date) {
       baseFilter = {
         sentence_water: 1,
-        ...(date &&
-          (() => {
-            const [day, month, year] = String(date).split("-").map(Number);
-            const startDate = new Date(Date.UTC(year, month , day, 0, 0, 0)); 
-            const endDate = new Date(Date.UTC(year, month , day + 1, 0, 0, 0)); 
-
-            return {
-              upload_date: {
-                gte: startDate.toISOString(),
-                lt: endDate.toISOString(),
-              },
-            };
-          })()),
+        ...(date && {upload_date : date}),
         ...(country && { Country: country }),
         ...(company && {
           Company:
@@ -392,19 +356,7 @@ export const sentenceGender = async (
     if (country || company || year || sector || sectorName || date) {
       baseFilter = {
         sentence_gender: 1,
-        ...(date &&
-          (() => {
-            const [day, month, year] = String(date).split("-").map(Number);
-            const startDate = new Date(Date.UTC(year, month , day, 0, 0, 0)); 
-            const endDate = new Date(Date.UTC(year, month , day + 1, 0, 0, 0)); 
-
-            return {
-              upload_date: {
-                gte: startDate.toISOString(),
-                lt: endDate.toISOString(),
-              },
-            };
-          })()),
+        ...(date && {upload_date : date}),
         ...(country && { Country: country }),
         ...(company && {
           Company:
@@ -513,19 +465,7 @@ export const supplyChain = async (
     if (country || company || year || sector || sectorName || date) {
       baseFilter = {
         sentence_suppliers: 1,
-        ...(date &&
-          (() => {
-            const [day, month, year] = String(date).split("-").map(Number);
-            const startDate = new Date(Date.UTC(year, month , day, 0, 0, 0)); 
-            const endDate = new Date(Date.UTC(year, month , day + 1, 0, 0, 0)); 
-
-            return {
-              upload_date: {
-                gte: startDate.toISOString(),
-                lt: endDate.toISOString(),
-              },
-            };
-          })()),
+        ...(date && {upload_date : date}),
         ...(country && { Country: country }),
         ...(company && {
           Company:
@@ -634,19 +574,7 @@ export const renewables = async (
     if (country || company || year || sector || sectorName || date) {
       baseFilter = {
         sentence_renewables: 1,
-        ...(date &&
-          (() => {
-            const [day, month, year] = String(date).split("-").map(Number);
-            const startDate = new Date(Date.UTC(year, month , day, 0, 0, 0)); 
-            const endDate = new Date(Date.UTC(year, month , day + 1, 0, 0, 0)); 
-
-            return {
-              upload_date: {
-                gte: startDate.toISOString(),
-                lt: endDate.toISOString(),
-              },
-            };
-          })()),
+        ...(date && {upload_date : date}),
         ...(country && { Country: country }),
         ...(company && {
           Company:
@@ -751,19 +679,7 @@ export const allSentence = async (
     let baseFilter;
     if (country || company || year || sector || sectorName || date) {
       baseFilter = {
-        ...(date &&
-          (() => {
-            const [day, month, year] = String(date).split("-").map(Number);
-            const startDate = new Date(Date.UTC(year, month  , day, 0, 0, 0)); 
-            const endDate = new Date(Date.UTC(year, month  , day + 1, 0, 0, 0)); 
-
-            return {
-              upload_date: {
-                gte: startDate.toISOString(),
-                lt: endDate.toISOString(),
-              },
-            };
-          })()),
+        ...(date && {upload_date : date}),
         ...(country && { Country: country }),
         ...(company && {
           Company:
@@ -1117,44 +1033,24 @@ export const getFiltersByTableName = async (
       ),
     ];
 
-    const uniqueDates = [
+    const uniqueDate = [
       ...new Set(
-        getFilter
-          .map((item: any) => {
-            const d = item.upload_date;
-            if (!d) return null;
-            const dateObj = new Date(d);
-            if (isNaN(dateObj.getTime())) return null;
-
-const day = String(dateObj.getUTCDate()).padStart(2, "0");
-const month = String(dateObj.getUTCMonth()).padStart(2, "0");
-const year = dateObj.getUTCFullYear();
-
-return `${day}-${month}-${year}`;
-          })
-          .filter(Boolean) // Remove nulls
-      ),
-    ].sort((a: any, b: any) => {
-      const [dayA, monthA, yearA] = a.split("-").map(Number);
-      const [dayB, monthB, yearB] = b.split("-").map(Number);
-      return (
-        new Date(yearA, monthA - 1, dayA).getTime() -
-        new Date(yearB, monthB - 1, dayB).getTime()
-      );
-    });
+        getFilter.map((item: any) => String(item.upload_date)).filter(Boolean).sort((a: any , b: any) => a - b)
+      )
+    ]
 
     response.status = 200;
     response.message = {
-      uniqueDates,
+      uniqueDate,
       uniqueCountries,
       uniqueCompanies,
       targetYears,
       uniqueSector,
       uniqueSectorNames,
     };
-  } catch (err) {
+  } catch (err: any) {
     response.status = 400;
-    response.message = "Failed to fetch countries";
+    response.message = {message: err.message};
   }
   res.status(response.status).json(response.message);
 };
